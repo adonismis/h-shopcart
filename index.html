@@ -8,54 +8,18 @@
     <title>六角血拼賣賣</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-    <style>
-        .btn-cart{
-            background-color:transparent;
-            position: relative;
-        }
-
-        .btn-cart .badge{
-            position: absolute;
-            top:-1px;
-            right:-1px;
-        }
-
-        .dropdown-menu-right{
-            right:0;
-            left:auto;
-        }
-
-        .jumbotron-bg{
-            background-image: url(https://images.unsplash.com/photo-1477901492169-d59e6428fc90?w=1350);
-            background-size: cover;
-            background-position:center center;
-            min-height: 400px;
-        }
-
-        .bg-lighter{
-            background-color: rgba(255,255,255,.65);
-        }
-
-        .box-shadow {
-            box-shadow:0 3px 5px rgba(0,0,0,.16);
-            transition:box-shadow .3s;
-        }
-
-        .box-shadow:hover {
-            box-shadow:0 4px 10px rgba(0,0,0,.24);
-        }
-    </style>
+    <link rel="stylesheet" href="all.css">
   </head>
   
   <body>
     <div class="app">
         <nav class="navbar navbar-light bg-light ">
             <a class="navbar-brand" href="index.html"><i class="fa fa-heart text-info" aria-hidden="true"></i> 六角血拼賣賣</a>
-            <div class="dropdown ml-auto">
+            <div class="dropdown ml-auto">                
                 <button class="btn btn-sm btn-cart" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-shopping-cart text-dark fa-2x " aria-hidden="true"></i>
                     <span class="badge badge-pill badge-danger">{{shopcartsCount}}</span>
-                </button>
+                </button>                
                 <div class="dropdown-menu dropdown-menu-right" style="min-width:300px;">
                     <div class="px-4 py-3">
                         <h6>已選擇商品：</h6>
@@ -64,7 +28,7 @@
                                 <tbody>
                                 <tr v-for="shopcart in shopcarts" >
                                     <td class="align-middle text-center">                       
-                                    <a href="#removeModal"  class="text-muted" data-toggle="modal" data-title="刪除 {{shopcart.title}} {{shopcart.num}} 件">
+                                    <a href="#removeModal"  class="text-muted" data-toggle="modal" v-on:click="shopmodal=shopcart">
                                         <i class="fa fa-trash-o" aria-hidden="true"></i>
                                     </a>
                                     </td>
@@ -92,72 +56,23 @@
                 </div>
             </div>
         </div>
+
         <div class="container">
             <div class="row">
                 <div class="col-md-4"></div>
                 <div class="col-md-8">
                     <div class="row">
-                        <div class="col-md-4 mb-4">
+                        <div class="col-md-4 mb-4" v-for="datacart in datacarts">
                             <div class="card border-0 text-center h-100 box-shadow">
-                                <img class="card-img-top" src="https://images.unsplash.com/photo-1494281258937-45f28753affd?w=1350" alt="Card image cap">
+                                <img class="card-img-top" v-bind:src="datacart.img_url" alt="Card image cap">
                                 <div class="card-body">
-                                    <h4 class="card-title">金牌西裝</h4>
-                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                    <h4 class="card-title">{{datacart.title}}</h4>
+                                    <p class="card-text">{{datacart.body}}</p>
                                 </div>
                                 <div class="card-footer border-top-0 bg-white">
                                     <div class="btn-group btn-group-sm">
-                                        <a href="#" class="btn btn-outline-secondary">SM</a>
-                                        <a href="#" class="btn btn-outline-secondary">M</a>
-                                        <a href="#" class="btn btn-outline-secondary">XL</a>
+                                        <a href="#addModal" data-toggle="modal" class="btn btn-outline-secondary" v-for="size in datacart.size">{{size}}</a>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-4">
-                            <div class="card border-0 text-center h-100 box-shadow">
-                                <img class="card-img-top" src="https://images.unsplash.com/photo-1494281258937-45f28753affd?w=1350" alt="Card image cap">
-                                <div class="card-body">
-                                    <h4 class="card-title">金牌西裝</h4>
-                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit.</p>
-                                </div>
-                                <div class="card-footer border-top-0 bg-white">
-                                    <a href="#" class="btn btn-primary">購買去</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-4">
-                            <div class="card border-0 text-center h-100 box-shadow">
-                                <img class="card-img-top" src="https://images.unsplash.com/photo-1494281258937-45f28753affd?w=1350" alt="Card image cap">
-                                <div class="card-body">
-                                    <h4 class="card-title">金牌西裝</h4>
-                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                </div>
-                                <div class="card-footer border-top-0 bg-white">
-                                    <a href="#" class="btn btn-primary">購買去</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-4">
-                            <div class="card border-0 text-center h-100 box-shadow">
-                                <img class="card-img-top" src="https://images.unsplash.com/photo-1494281258937-45f28753affd?w=1350" alt="Card image cap">
-                                <div class="card-body">
-                                    <h4 class="card-title">金牌西裝</h4>
-                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                </div>
-                                <div class="card-footer border-top-0 bg-white">
-                                    <a href="#" class="btn btn-primary">購買去</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-4">
-                            <div class="card border-0 text-center h-100 box-shadow">
-                                <img class="card-img-top" src="https://images.unsplash.com/photo-1494281258937-45f28753affd?w=1350" alt="Card image cap">
-                                <div class="card-body">
-                                    <h4 class="card-title">金牌西裝</h4>
-                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                </div>
-                                <div class="card-footer border-top-0 bg-white">
-                                    <a href="#" class="btn btn-primary">購買去</a>
                                 </div>
                             </div>
                         </div>
@@ -166,7 +81,26 @@
             </div>
         </div>
 
-        
+
+        <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header bg-danger text-white">
+                        <h5 class="modal-title">新增</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        確認刪除資料？
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" @click="checkCart()" data-dismiss="modal">取消</button>
+                        <button type="button" class="btn btn-outline-danger" @click="removeCart()" data-dismiss="modal">刪除</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
 
@@ -183,70 +117,21 @@
                     確認刪除資料？
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-                    <button type="button" class="btn btn-outline-danger" @click="removeCart(shopcart)" data-dismiss="modal">刪除</button>
+                    <button type="button" class="btn btn-secondary" @click="checkCart()" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-outline-danger" @click="removeCart()" data-dismiss="modal">刪除</button>
                 </div>
                 </div>
             </div>
         </div>
 
-
     </div>
-
-
-    
   
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.3/vue.js"></script>
-  <script>
-    $(document).ready(function () {
-      $('#removeModal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget) // 選則當初觸發事件的按鈕
-        var title = button.data('title') // 使用 data-* 來取得特定內容
+  <script src="all.js"></script>
 
-        var modal = $(this)
-        modal.find('.modal-title').text('確認' + title) // 寫入資料
-      })
-      
-    });
-
-    var app = new Vue({
-    el: '.app',
-    data:{
-        shopcarts:[
-            {
-                title:'金牌西裝',
-                num:'1',
-                price:'520'
-            },
-            {
-                title:'金牌女裝',
-                num:'1',
-                price:'480'
-            },
-
-        ],
-        newTodo:''
-    },
-    methods:{
-        addCart: function(shopcart){
-        this.shopcarts.push({title:shopTitle,num:shopNum,price:shopPrice})
-        },
-        removeCart: function(shopcart){
-            this.shopcarts.splice(this.shopcarts.indexOf(shopcart), 1);
-        }
-    },
-    computed:{
-        shopcartsCount:function(){
-            return this.shopcarts.length 
-        }
-    }
-
-    })
-
-  </script>
   </body>
   
   </html>

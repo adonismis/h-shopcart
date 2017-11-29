@@ -7,46 +7,7 @@ $(document).ready(function () {
     })
 });
 
-
-var datacarts = [
-                    { 
-                        "id": "1", 
-                        "title": "金牌西裝", 
-                        "img_url":"https://images.unsplash.com/photo-1494281258937-45f28753affd?w=1350",
-                        "size": ["SM", "M", "L", "XL"], 
-                        "price": 520, "price": 520, 
-                    }, 
-                    {
-                        "id": "2",
-                        "title": "金牌女裝",
-                        "img_url":"https://images.unsplash.com/photo-1481399124169-87493351c8a1?w=1349",
-                        "size": ["SM", "M", "L", "XL"],
-                        "price": 520, "price": 520,
-                    }, 
-                    {
-                        "id": "3",
-                        "title": "特工眼鏡",
-                        "img_url": "https://images.unsplash.com/photo-1486250944723-86bca2b15b06?w=1351",
-                        "size": ["SM", "M", "L", "XL"],
-                        "price": 520, "price": 520,
-                    },  
-                    {
-                        "id": "4",
-                        "title": "特工西裝",
-                        "img_url": "https://images.unsplash.com/photo-1497339100210-9e87df79c218?w=1350",
-                        "size": ["SM", "M", "L", "XL"],
-                        "price": 520, "price": 520,
-                    },   
-                    {
-                        "id": "5",
-                        "title": "變聲領帶",
-                        "img_url": "https://images.unsplash.com/photo-1485373650022-3ed53f62b8f3?w=634",
-                        "size": ["SM", "M", "L", "XL"],
-                        "price": 520, "price": 520,
-                    }, 
-                ];
-
-                
+              
 
 
 var app = new Vue({
@@ -67,7 +28,7 @@ var app = new Vue({
                             "img_url": "https://images.unsplash.com/photo-1481399124169-87493351c8a1?w=1349",
                             "size": ["SM", "M", "L", "XL"],
                             "body": "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
-                            "price": 520, "price": 520,
+                            "price": 520, 
                         },
                         {
                             "id": "3",
@@ -75,7 +36,7 @@ var app = new Vue({
                             "img_url": "https://images.unsplash.com/photo-1486250944723-86bca2b15b06?w=1351",
                             "size": ["SM", "M", "L", "XL"],
                             "body": "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
-                            "price": 520, "price": 520,
+                            "price": 520, 
                         },
                         {
                             "id": "4",
@@ -83,7 +44,7 @@ var app = new Vue({
                             "img_url": "https://images.unsplash.com/photo-1497339100210-9e87df79c218?w=1350",
                             "size": ["SM", "M", "L", "XL"],
                             "body": "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
-                            "price": 520, "price": 520,
+                            "price": 520, 
                         },
                         {
                             "id": "5",
@@ -91,7 +52,7 @@ var app = new Vue({
                             "img_url": "https://images.unsplash.com/photo-1485373650022-3ed53f62b8f3?w=634",
                             "size": ["SM", "M", "L", "XL"],
                             "body": "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
-                            "price": 520, "price": 520,
+                            "price": 520, 
                         },
                     ],
         shopcarts: [
@@ -112,16 +73,24 @@ var app = new Vue({
 
                     ],
         newTodo: '',
-        shopmodal:''
+        shopmodal:'',
+        addshopmodal:'',
     },
     methods: {
-        addCart: function () {
+        addShopCart: function (datacart, size) {
+            datacart.selectsize = size;
+            this.addshopmodal = datacart;
+        },
+        addCart: function (num) {
+            console.log(num);
+            /*
             this.shopcarts.push({ 
                 title: shopTitle, 
                 num: shopNum, 
                 price: shopPrice 
             })
             localStorage.setItem('cartStorage', JSON.stringify(this.shopcarts));
+            */
         },
         removeCart: function () {
             this.shopcarts.splice(this.shopcarts.indexOf(this.shopmodal), 1);
@@ -130,7 +99,8 @@ var app = new Vue({
         checkCart: function (){
             var retrievedObject = localStorage.getItem('cartStorage');
             console.log('retrievedObject: ', JSON.parse(retrievedObject));
-        }
+        },
+
     },
     computed: {
         shopcartsCount: function () {

@@ -27,7 +27,7 @@
                             <table class="table table-sm">
                                 <tbody>
                                 <tr v-for="shopcart in shopcarts" >
-                                    <td class="align-middle text-center">                       
+                                    <td class="align-middle text-center">
                                     <a href="#removeModal"  class="text-muted" data-toggle="modal" v-on:click="shopmodal=shopcart">
                                         <i class="fa fa-trash-o" aria-hidden="true"></i>
                                     </a>
@@ -38,7 +38,7 @@
                                 </tr>
                                 </tbody>
                             </table>
-                            <a href="shoppingCart-checkout.html" class="btn btn-primary btn-block">
+                            <a href="shoppingCart-checkout.html" class="btn btn-info btn-block">
                                 <i class="fa fa-shopping-cart" aria-hidden="true"></i> 結帳去
                             </a>
                         </div>
@@ -70,8 +70,8 @@
                                     <p class="card-text">{{datacart.body}}</p>
                                 </div>
                                 <div class="card-footer border-top-0 bg-white">
-                                    <div class="btn-group btn-group-sm">
-                                        <a href="#addModal" data-toggle="modal" class="btn btn-outline-secondary" v-for="size in datacart.size">{{size}}</a>
+                                     <div class="btn-group btn-group-sm">
+                                        <a href="#addModal" data-toggle="modal" class="btn btn-outline-secondary" v-for="size in datacart.size" v-on:click="addShopCart(datacart,size)">{{size}}</a>
                                     </div>
                                 </div>
                             </div>
@@ -85,19 +85,51 @@
         <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <div class="modal-header bg-danger text-white">
-                        <h5 class="modal-title">新增</h5>
+                    <div class="modal-header bg-info text-white">
+                        <h5 class="modal-title">加入購物車</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        確認刪除資料？
+                        <div class="container">
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    <label for="title">產品名稱</label>
+                                    <div id="title" class="text-info" style="font-size:24px">{{addshopmodal.title}}</div>
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label for="size">尺寸</label>
+                                    <div id="size" class="text-info" style="font-size:24px">{{addshopmodal.selectsize}}</div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="price">價格</label>
+                                    <div id="price" class="text-info" style="font-size:24px">${{addshopmodal.price}}元</div>
+                                </div>
+
+                                <div class="form-group col-md-12">
+                                    <label for="num">數量</label>
+                                    <select id="num" class="form-control" v-model="num">
+                                        <option selected>--請選擇--</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" @click="checkCart()" data-dismiss="modal">取消</button>
-                        <button type="button" class="btn btn-outline-danger" @click="removeCart()" data-dismiss="modal">刪除</button>
-                    </div>
+                        <button type="button" class="btn btn-secondary"  data-dismiss="modal">取消</button>
+                        <button type="button" class="btn btn-info" @click="addCart(num)" data-dismiss="modal">加入</button>
+                    </div>                    
                 </div>
             </div>
         </div>

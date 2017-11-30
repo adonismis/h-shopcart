@@ -6,9 +6,7 @@ $(document).ready(function () {
         modal.find('.modal-title').text('確認' + title) // 寫入資料
     })
 });
-
               
-
 
 var app = new Vue({
     el: '.app',
@@ -20,7 +18,8 @@ var app = new Vue({
                             "img_url": "https://images.unsplash.com/photo-1494281258937-45f28753affd?w=1350",
                             "size": ["SM", "M", "L", "XL"],
                             "body":"This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
-                            "price": 520, "price": 520,
+                            "price": 520, 
+                            "selectnum":"",
                         },
                         {
                             "id": "2",
@@ -28,7 +27,8 @@ var app = new Vue({
                             "img_url": "https://images.unsplash.com/photo-1481399124169-87493351c8a1?w=1349",
                             "size": ["SM", "M", "L", "XL"],
                             "body": "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
-                            "price": 520, 
+                            "price": 520,
+                            "selectnum": "",
                         },
                         {
                             "id": "3",
@@ -36,7 +36,8 @@ var app = new Vue({
                             "img_url": "https://images.unsplash.com/photo-1486250944723-86bca2b15b06?w=1351",
                             "size": ["SM", "M", "L", "XL"],
                             "body": "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
-                            "price": 520, 
+                            "price": 520,
+                            "selectnum": "",
                         },
                         {
                             "id": "4",
@@ -44,7 +45,8 @@ var app = new Vue({
                             "img_url": "https://images.unsplash.com/photo-1497339100210-9e87df79c218?w=1350",
                             "size": ["SM", "M", "L", "XL"],
                             "body": "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
-                            "price": 520, 
+                            "price": 520,
+                            "selectnum": "",
                         },
                         {
                             "id": "5",
@@ -52,45 +54,31 @@ var app = new Vue({
                             "img_url": "https://images.unsplash.com/photo-1485373650022-3ed53f62b8f3?w=634",
                             "size": ["SM", "M", "L", "XL"],
                             "body": "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
-                            "price": 520, 
+                            "price": 520,
+                            "selectnum": "",
                         },
                     ],
-        shopcarts: [
-                        {
-                            id: '',
-                            title: '金牌西裝',
-                            num: '1',
-                            size:'',
-                            price: '520'
-                        },
-                        {
-                            id: '',
-                            title: '金牌女裝',
-                            num: '1',
-                            size:'',
-                            price: '480'
-                        },
-
-                    ],
+        shopcarts: [],
         newTodo: '',
         shopmodal:'',
         addshopmodal:'',
+        num:'',
     },
     methods: {
         addShopCart: function (datacart, size) {
             datacart.selectsize = size;
             this.addshopmodal = datacart;
         },
-        addCart: function (num) {
-            console.log(num);
-            /*
+        addCart: function () {
+            var data = this.addshopmodal;
+
             this.shopcarts.push({ 
-                title: shopTitle, 
-                num: shopNum, 
-                price: shopPrice 
+                title: data.title, 
+                num: data.selectnum, 
+                size: data.selectsize, 
+                price: data.price, 
             })
             localStorage.setItem('cartStorage', JSON.stringify(this.shopcarts));
-            */
         },
         removeCart: function () {
             this.shopcarts.splice(this.shopcarts.indexOf(this.shopmodal), 1);
